@@ -81,13 +81,21 @@ app.get('/collectionName/:keyword', (req, res) => {
 //Updates song information by track ID (at least that's the goal)
 app.patch('/update/:id', (req, res) => {
     let trackId = req.params.id
-    let trackName = req.body.trackName
-    let collectionName = req.body.collectionName
 
-    let songObj = beatles.filter(song => song['trackId'].toString().includes(value)) 
-
-    if
-
+    let songObj = {
+        "trackId": req.params.id,
+        "trackName": req.body.trackName,
+        "collectionName": req.body.collectionName
+    }
+    
+    let value = 0;
+    for(var i = 0; i < beatles.length; i++){
+        if(beatles[i]['trackId'].toString() === trackId){
+            beatles[i] = {...beatles[i], ...songObj}
+            value = i;
+        }
+    }
+    res.send(beatles[value])
 })
 
 
