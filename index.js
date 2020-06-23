@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const beatles = require('./beatles.json') //Call that pulled the file info: https://itunes.apple.com/search?term=beatles&entity=musicTrack
+const allArtists = require('./allArtists.json') //Beatles and Toby Mac - Toby Mac is from https://itunes.apple.com/search?term=toby+mac&entity=musicTrack
 
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}));
@@ -109,6 +110,40 @@ app.post('/add', (req, res) =>{
     beatles.push(songObj)
     res.send(beatles[beatles.length-1])
 })
+
+
+
+/*Everything below this line includes the Beatles and Toby Mac - everything above just deals with the beatles*/
+
+
+//Retrieves list of songs for a given artist ID
+app.get('/artistId/:id', (req, res) => {
+    let value = req.params.id
+    let songObj = allArtists.filter(song => song['artistId'].toString().includes(value)) 
+    let song = [];
+    for(var i = 0; i < songObj.length; i++){
+        song[i] = {
+            "trackName": songObj[i]['trackName'],
+            "collectionName": songObj[i]['collectionName']
+        }
+    }
+    res.send(song)
+});
+
+//Retrieves list of songs (just track and collection name) for artist name keyword 
+app.get('/artistName/:keyword', (req, res) => {
+    let value = req.params.keyword
+    let songObj = allArtists.filter(song => song['artistName'].toLowerCase().includes(value)) 
+    let song = [];
+    for(var i = 0; i < songObj.length; i++){
+        song[i] = {
+            "trackName": songObj[i]['trackName'],
+            "collectionName": songObj[i]['collectionName']
+        }
+    }
+    res.send(song)
+});
+
 
 
 const port = 3000
