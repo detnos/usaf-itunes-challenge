@@ -78,12 +78,11 @@ app.get('/collectionName/:keyword', (req, res) => {
     res.send(song)
 })
 
-//Updates song information by track ID (at least that's the goal)
+//Updates song information (track and collection name) by track ID 
 app.patch('/update/:id', (req, res) => {
     let trackId = req.params.id
 
     let songObj = {
-        "trackId": req.params.id,
         "trackName": req.body.trackName,
         "collectionName": req.body.collectionName
     }
@@ -96,6 +95,19 @@ app.patch('/update/:id', (req, res) => {
         }
     }
     res.send(beatles[value])
+})
+
+//Adds a new song entry (just kind, track name, collection name, and artist name )
+app.post('/add', (req, res) =>{
+    let songObj = {
+        "kind": req.body.kind,
+        "artistName": req.body.artistName,
+        "collectionName": req.body.collectionName,
+        "trackName": req.body.trackName
+    }
+
+    beatles.push(songObj)
+    res.send(beatles[beatles.length-1])
 })
 
 
