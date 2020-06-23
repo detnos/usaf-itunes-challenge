@@ -111,6 +111,21 @@ app.post('/add', (req, res) =>{
     res.send(beatles[beatles.length-1])
 })
 
+app.delete('/delete/:id', (req, res) => {
+    let trackId = req.params.id;
+    let songTitle = "";
+    let value = 0;
+    for (var i = 0; i < beatles.length; i++) {
+        if (beatles[i]['trackId'].toString() === trackId) {
+            songTitle = beatles[i].trackName;
+            console.log('track to be deleted: ', beatles[value])
+            beatles.splice(i, 1)
+            value = i;
+        }
+    }
+
+    res.send(`Song "${songTitle}" with id: ${trackId}, has been deleted.`)
+})
 
 
 /*Everything below this line includes the Beatles and Toby Mac - everything above just deals with the beatles*/
