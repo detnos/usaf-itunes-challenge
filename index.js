@@ -14,12 +14,12 @@ app.get('/', (req, res) => {
         songArr[i] = beatles[i].trackName
     }
     res.send(songArr)
-})
+});
 
 //Retrieves entire API
 app.get('/all', (req, res) => {
     res.send(beatles)
-})
+});
 
 //Retrieves song track and collection name for a given track ID
 app.get('/trackId/:id', (req, res) => {
@@ -33,7 +33,7 @@ app.get('/trackId/:id', (req, res) => {
         }
     }
     res.send(song)
-})
+});
 
 
 //Retrieves song track and collection name for a given track name keyword (word like "the" will pull song "come together")
@@ -48,7 +48,7 @@ app.get('/trackName/:keyword', (req, res) => {
         }
     }
     res.send(song)
-})
+});
 
 //Retrieves song track and collection name for a given collection ID
 app.get('/collectionId/:id', (req, res) => {
@@ -62,7 +62,7 @@ app.get('/collectionId/:id', (req, res) => {
         }
     }
     res.send(song)
-})
+});
 
 //Retrieves song track and collection name for a given collection name keyword (also accepts numbers)
 app.get('/collectionName/:keyword', (req, res) => {
@@ -76,7 +76,7 @@ app.get('/collectionName/:keyword', (req, res) => {
         }
     }
     res.send(song)
-})
+});
 
 //Updates song information by track ID (at least that's the goal)
 app.patch('/update/:id', (req, res) => {
@@ -86,9 +86,9 @@ app.patch('/update/:id', (req, res) => {
 
     let songObj = beatles.filter(song => song['trackId'].toString().includes(value)) 
 
-    if
+    //if
 
-})
+});
 
 
 const port = 3000
