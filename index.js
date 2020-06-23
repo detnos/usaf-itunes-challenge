@@ -80,6 +80,7 @@ app.get('/collectionName/:keyword', (req, res) => {
 
 //Updates song information (track and collection name) by track ID 
 app.patch('/update/:id', (req, res) => {
+    let trackId = req.params.id
 
     let songObj = {
         "trackName": req.body.trackName,
